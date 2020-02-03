@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Video Xylophone!</title>
+
+    <style>
+
+        body {
+            margin: 0;
+        }
+
+        #container {
+            width: 640px;
+            height: 480px;
+
+            position: relative;
+        }
+
+        #xylophone {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+
+            display: flex;
+            justify-content: center;
+        }
+
+        .key {
+            width: 12.5%;
+            height: 150px;
+
+            border-bottom-left-radius: 10%;
+            border-bottom-right-radius: 10%;
+
+            margin-left: 10px;
+            margin-right: 10px;
+
+            background-color: black;
+
+            transition: height 100ms ease-in-out;
+        }
+        .key.played {
+            height: 130px;
+        }
+
+        #webcam { display: none; }
+    
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <video id="webcam" autoplay width="640" height="480"></video>
+        <!-- <canvas id="old" width="640" height="480"></canvas>
+        <canvas id="new" width="640" height="480"></canvas> -->
+        <canvas id="source" width="640" height="480"></canvas>
+        <canvas id="scratch" width="640" height="480"></canvas>
+        <canvas id="blended" width="640" height="480"></canvas>
+        <div id="xylophone">
+            <div class="key"></div>
+            <div class="key"></div>
+            <div class="key"></div>
+            <div class="key"></div>
+            <div class="key"></div>
+            <div class="key"></div>
+            <div class="key"></div>
+            <div class="key"></div>
+        </div>
+    </div>
+
+    <audio src="sounds/a.mp3"></audio>
+    <audio src="sounds/b.mp3"></audio>
+    <audio src="sounds/c.mp3"></audio>
+    <audio src="sounds/d.mp3"></audio>
+    <audio src="sounds/e.mp3"></audio>
+    <audio src="sounds/f.mp3"></audio>
+    <audio src="sounds/g.mp3"></audio>
+    <audio src="sounds/h.mp3"></audio>
+
+    <script src="app.js"></script>
+</body>
+</html>
