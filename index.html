@@ -8,68 +8,64 @@
 
     <style>
 
-        body {
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        #control-panel {
+            background-color: #fff;
+            padding: 1em;
+            margin-bottom: 1em;
+        }
+
+        body {
+            background-color: #000;
         }
 
         #container {
-            width: 640px;
-            height: 480px;
-
             position: relative;
-        }
-
-        #xylophone {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
 
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .key {
-            width: 12.5%;
-            height: 150px;
-
-            border-bottom-left-radius: 10%;
-            border-bottom-right-radius: 10%;
-
-            margin-left: 10px;
-            margin-right: 10px;
-
-            background-color: black;
-
-            transition: height 100ms ease-in-out;
-        }
-        .key.played {
-            height: 130px;
+        #overlay {
+            position: absolute; 
+            top: 0; 
+            left:50%;
+            transform: translateX(-50%);
         }
 
-        #webcam { display: none; }
-    
+        #diff {
+            display: none;
+        }
+
+        label[for="cb-show-diff-canvas"] {
+            margin-left: 1em;
+        }
+        select[data-chosen="videodiff"] ~ label[for="cb-show-diff-canvas"] {
+            display: inline;
+        }
+
     </style>
+
 </head>
 <body>
 
+    <div id="control-panel">
+        <select id="detection-mode">
+            <option value="videodiff">Simple Video Diff</option>
+            <option value="tensorflow">Tensor Flow</option>
+        </select>
+        <label for="cb-show-diff-canvas"><input type="checkbox" id="cb-show-diff-canvas" onchange="document.getElementById('diff').style.display = this.checked ? 'block' : 'none'"> Show diff canvas</label>
+    </div>
     <div id="container">
-        <video id="webcam" autoplay width="640" height="480"></video>
-        <!-- <canvas id="old" width="640" height="480"></canvas>
-        <canvas id="new" width="640" height="480"></canvas> -->
-        <canvas id="source" width="640" height="480"></canvas>
-        <canvas id="scratch" width="640" height="480"></canvas>
-        <canvas id="blended" width="640" height="480"></canvas>
-        <div id="xylophone">
-            <div class="key"></div>
-            <div class="key"></div>
-            <div class="key"></div>
-            <div class="key"></div>
-            <div class="key"></div>
-            <div class="key"></div>
-            <div class="key"></div>
-            <div class="key"></div>
-        </div>
+        <video id="webcam" autoplay style="display:none;"></video>
+        <canvas id="canvas"></canvas>
+        <canvas id="overlay"></canvas>
+        <canvas id="diff"></canvas>
     </div>
 
     <audio src="sounds/a.mp3"></audio>
@@ -81,6 +77,6 @@
     <audio src="sounds/g.mp3"></audio>
     <audio src="sounds/h.mp3"></audio>
 
-    <script src="app.js"></script>
 </body>
+<script src="app.js"></script>
 </html>
